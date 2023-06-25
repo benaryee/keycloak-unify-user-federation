@@ -1,4 +1,4 @@
-package com.fluxit.demo.auth.provider.user;
+package com.rancard.auth.provider.user;
 
 import java.util.Date;
 import java.util.List;
@@ -19,6 +19,7 @@ public class LegacyUser extends AbstractUserAdapter {
 	private final String lastName;
 	private final Date birthDate;
 
+
 	private LegacyUser(KeycloakSession session, RealmModel realm, ComponentModel storageProviderModel, String username,
 			String email, String firstName, String lastName, Date birthDate) {
 		super(session, realm, storageProviderModel);
@@ -27,7 +28,6 @@ public class LegacyUser extends AbstractUserAdapter {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthDate = birthDate;
-
 	}
 
 	@Override
@@ -44,6 +44,7 @@ public class LegacyUser extends AbstractUserAdapter {
 	public String getLastName() {
 		return lastName;
 	}
+
 
 	@Override
 	public String getEmail() {

@@ -1,4 +1,4 @@
-package com.fluxit.demo.auth.provider.user;
+package com.rancard.auth.provider.user;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
