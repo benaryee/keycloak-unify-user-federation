@@ -52,7 +52,7 @@ public class LegacyUserStorageProvider
 		log.info("getUsersCount: realm={}", realm.getName());
 		try (Connection c = LegacyDBConnection.getConnection(this.model)) {
 			Statement st = c.createStatement();
-			st.execute("select count(*) from users");
+			st.execute("select count(*) from user");
 			ResultSet rs = st.getResultSet();
 			rs.next();
 
@@ -76,7 +76,7 @@ public class LegacyUserStorageProvider
 		try (Connection c = LegacyDBConnection.getConnection(this.model)) {
 			log.info("About to execute SQL statement");
 			PreparedStatement st = c.prepareStatement(
-					"select msisdn,full_name, email from users order by full_name limit ? offset ?");
+					"select msisdn,full_name, email from user order by full_name limit ? offset ?");
 			st.setInt(1, maxResults);
 			st.setInt(2, firstResult);
 			st.execute();
@@ -106,7 +106,7 @@ public class LegacyUserStorageProvider
 
 		try (Connection c = LegacyDBConnection.getConnection(this.model)) {
 			PreparedStatement st = c.prepareStatement(
-					"select msisdn,full_name, email from users where full_name like ? order by full_name limit ? offset ?");
+					"select msisdn,full_name, email from user where full_name like ? order by full_name limit ? offset ?");
 			st.setString(1, search);
 			st.setInt(2, maxResults);
 			st.setInt(3, firstResult);
@@ -185,7 +185,7 @@ public class LegacyUserStorageProvider
 		String username = sid.getExternalId();
 
 		try (Connection c = LegacyDBConnection.getConnection(this.model)) {
-			PreparedStatement st = c.prepareStatement("select password from users where username = ?");
+			PreparedStatement st = c.prepareStatement("select password from user where username = ?");
 			st.setString(1, username);
 			st.execute();
 			ResultSet rs = st.getResultSet();
@@ -212,7 +212,7 @@ public class LegacyUserStorageProvider
 		log.info("getUserByUsername({})", username);
 		try (Connection c = LegacyDBConnection.getConnection(this.model)) {
 			PreparedStatement st = c.prepareStatement(
-					"select msisdn,full_name, email from users order by full_name where username = ?");
+					"select msisdn,full_name, email from user order by full_name where username = ?");
 			st.setString(1, username);
 			st.execute();
 			ResultSet rs = st.getResultSet();
@@ -231,7 +231,7 @@ public class LegacyUserStorageProvider
 		log.info("getUserByEmail({})", email);
 		try (Connection c = LegacyDBConnection.getConnection(this.model)) {
 			PreparedStatement st = c.prepareStatement(
-					"select msisdn,full_name, email from users order by full_name where email = ?");
+					"select msisdn,full_name, email from user order by full_name where email = ?");
 			st.setString(1, email);
 			st.execute();
 			ResultSet rs = st.getResultSet();
